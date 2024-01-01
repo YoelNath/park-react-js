@@ -15,11 +15,21 @@ const ParkingEntry = () => {
   };
 
   return (
-    <div>
-      <h2>Parking Entry</h2>
-      <label>Police Number:</label>
-      <input type="text" value={policeNumber} onChange={(e) => setPoliceNumber(e.target.value)} />
-      <button type="button" onClick={handleEntry}>Submit</button>
+    <div className="container mt-4">
+      <h2 className="mb-4">Parking Entry</h2>
+      <div className="mb-3">
+        <label htmlFor="policeNumber" className="form-label">Police Number:</label>
+        <input
+          type="text"
+          id="policeNumber"
+          className="form-control"
+          value={policeNumber}
+          onChange={(e) => setPoliceNumber(e.target.value)}
+        />
+      </div>
+      <button type="button" className="btn btn-primary" onClick={handleEntry}>
+        Submit
+      </button>
     </div>
   );
 };
