@@ -12,11 +12,10 @@ app.use(cors());
 
 const db = mysql.createConnection({
   host: 'localhost',
-  user: 'host',
+  user: 'root',
   password: '',
   database: 'parking_entries',
 });
-
 db.connect((err) => {
   if (err) {
     console.error('Error connecting to MySQL:', err);
@@ -31,10 +30,8 @@ app.post('/api/exit', async (req, res) => {
   console.log('Received unique code for exit:', uniqueCode);
 
   try {
-    // Validate unique code
-    const isValidCode = validateUniqueCode(uniqueCode);
-
-    if (isValidCode) {
+    // Validate unique code (dummy logic for demonstration)
+    if (validateUniqueCode(uniqueCode)) {
       // Implement logic to calculate fee, record exit time, etc.
       const exitTime = new Date().toLocaleString();
       const parkingFee = calculateParkingFee();
