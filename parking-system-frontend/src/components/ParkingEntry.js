@@ -7,14 +7,14 @@ const ParkingEntry = () => {
   const handleEntry = async () => {
     const uniqueCode = uuidv4();
     const entryTime = new Date().toLocaleString();
-
+    const formattedEntryTime = new Date(entryTime).toISOString().slice(0, 19).replace("T", " ");
     try {
       const response = await fetch('http://localhost:5000/api/entry', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ uniqueCode, entryTime, policeNumber }),
+        body: JSON.stringify({ uniqueCode, entryTime: formattedEntryTime, policeNumber }),
       });
 
       if (response.ok) {

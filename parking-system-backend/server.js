@@ -26,21 +26,22 @@ db.connect((err) => {
 
 // Handle parking entry
 app.post('/api/entry', (req, res) => {
+
   const { uniqueCode } = req.body;
   const { entryTime} = req.body;
-
+  const { policeNumber } = req.body;
   try {
     // Insert entry data into the database
     db.query(
-      'INSERT INTO parking_entries (unique_code, entry_time) VALUES (?, ?)',
-      [uniqueCode, entryTime],
+      'INSERT INTO parking_entries (unique_code, entry_time, police_number) VALUES (?, ?, ?)',
+      [uniqueCode, entryTime, policeNumber],
       (error, results) => {
         if (error) {
           console.error('Error inserting entry data:', error);
           res.status(500).json({ success: false, error: 'Internal Server Error' },results);
         } else {
           console.log('Entry data inserted successfully.');
-          res.status(201).json({ success: true, uniqueCode, arrivedTime,});
+          res.status(201).json({ success: true, uniqueCode, entryTime, policeNumber});
         }
       }
     );
