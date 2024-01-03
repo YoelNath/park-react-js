@@ -116,6 +116,24 @@ const calculateParkingFee = () => {
   return 3000; // Flat fee of Rp 3000/hour (dummy value for demonstration)
 };
 
+// const calculateParkingFee = (entryTime, exitTime) => {
+//   // Parse entry and exit times to Date objects
+//   const entryTimestamp = new Date(entryTime).getTime();
+//   const exitTimestamp = new Date(exitTime).getTime();
+
+//   // Calculate the duration in milliseconds
+//   const durationMs = exitTimestamp - entryTimestamp;
+
+//   // Calculate the duration in hours
+//   const durationHours = durationMs / (1000 * 60 * 60);
+
+//   // Calculate the parking fee (assuming a flat fee of Rp 3000 per hour)
+//   const parkingFee = durationHours * 3000;
+
+//   // Return the calculated parking fee
+//   return parkingFee;
+// };
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
