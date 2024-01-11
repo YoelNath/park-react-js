@@ -24,14 +24,14 @@ db.connect((err) => {
   }
 });
 
-// Handle parking entry
+
 app.post('/api/entry', (req, res) => {
 
   const { uniqueCode } = req.body;
   const { entryTime} = req.body;
   const { policeNumber } = req.body;
   try {
-    // Insert entry data into the database
+
     db.query(
       'INSERT INTO parking_entries (unique_code, entry_time, police_number) VALUES (?, ?, ?)',
       [uniqueCode, entryTime, policeNumber],
@@ -51,21 +51,20 @@ app.post('/api/entry', (req, res) => {
   }
 });
 
-// Handle parking exit
+
 app.post('/api/exit', async (req, res) => {
   const { uniqueCode } = req.body;
   console.log('Received unique code for exit:', uniqueCode);
 
   try {
-    // Validate unique code (dummy logic for demonstration)
-// Validate unique code (dummy logic for demonstration)
+
 validateUniqueCode(uniqueCode, (codeExists) => {
   if (codeExists) {
-    // Implement logic to calculate fee, record exit time, etc.
+
     const exitTime = new Date().toLocaleString();
     const parkingFee = calculateParkingFee();
 
-    // Insert exit data into the database
+
     db.query(
       'UPDATE parking_entries SET exit_time = ?, parking_fee = ? WHERE unique_code = ?',
       [exitTime, parkingFee, uniqueCode],
@@ -75,27 +74,26 @@ validateUniqueCode(uniqueCode, (codeExists) => {
           res.status(500).json({ success: false, error: 'Internal Server Error' });
         } else {
           console.log('Exit data updated successfully.');
-          // Send success response
+
           res.status(200).json({ success: true, exitTime, parkingFee });
         }
       }
     );
   } else {
     console.error('Invalid unique code for exit');
-    // Send error response for invalid unique code
+
     res.status(400).json({ success: false, error: 'Invalid unique code' });
   }
 });
 
   } catch (error) {
     console.error('Error during exit:', error);
-    // Send error response for internal server error
+
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 });
 
-// Dummy function to validate unique code (replace with actual validation logic)
-// Dummy function to validate unique code (replace with actual validation logic)
+
 const validateUniqueCode = (code, callback) => {
   // Example: Check if the code exists in the database
   db.query('SELECT * FROM parking_entries WHERE unique_code = ?', [code], (error, results) => {

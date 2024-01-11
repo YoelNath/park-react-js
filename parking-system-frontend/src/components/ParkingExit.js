@@ -18,15 +18,15 @@ const ParkingExit = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('Exit successful:', data);
-        // Handle success or display relevant information to the user
+
       } else {
         const errorData = await response.json();
         console.error('Exit failed. Response status:', response.status, 'Error:', errorData.error);
-        // Handle failure or display an error message to the user
+   
       }
     } catch (error) {
       console.error('Error during exit:', error);
-      // Handle error or display an error message to the user
+
     }
   };
 
